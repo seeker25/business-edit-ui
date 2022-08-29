@@ -5,7 +5,7 @@ import { AddressesIF, OrgPersonIF, ShareClassIF, NameRequestIF, BusinessInformat
   CertifyIF,
   NameTranslationIF, FilingDataIF, StateIF, EffectiveDateTimeIF, FlagsReviewCertifyIF,
   FlagsCompanyInfoIF, ResolutionsIF, FeesIF, ResourceIF, EntitySnapshotIF, ValidationFlagsIF,
-  CorrectionInformationIF, CreateResolutionIF }
+  CorrectionInformationIF, CreateResolutionIF, CreateRulesIF }
   from '@/interfaces/'
 import { CompletingPartyIF, ContactPointIF, NaicsIF, StaffPaymentIF }
   from '@bcrs-shared-components/interfaces/'
@@ -929,4 +929,9 @@ export const getCompletingParty = (state: StateIF): CompletingPartyIF => {
 /** The Create Special Resolution object. */
 export const getcreateResolution = (state: StateIF): CreateResolutionIF => {
   return state.stateModel.createResolution
+}
+
+/** The Create Rules object. */
+export const getCreateRulesStep = (state: StateIF): CreateRulesIF => {
+  return state.stateModel.createRulesStep
 }

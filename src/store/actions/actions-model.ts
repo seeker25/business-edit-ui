@@ -1,6 +1,6 @@
 import { ActionIF, ActionKvIF, AddressesIF, BusinessInformationIF, CertifyIF, EntitySnapshotIF,
   NameRequestIF, NameTranslationIF, OrgPersonIF, ShareClassIF, FeesIF, ResourceIF, FilingDataIF,
-  CorrectionInformationIF, CreateResolutionIF } from '@/interfaces/'
+  CorrectionInformationIF, CreateResolutionIF, ValidationDetailIF, CreateRulesIF } from '@/interfaces/'
 import { CompletingPartyIF, ContactPointIF, NaicsIF } from '@bcrs-shared-components/interfaces/'
 import { FilingTypes } from '@/enums/'
 import { CorpTypeCd } from '@bcrs-shared-components/corp-type-module/'
@@ -272,4 +272,16 @@ export const setNaics: ActionIF = ({ commit }, naics: NaicsIF): void => {
 
 export const setResolution = ({ commit }, resolution: CreateResolutionIF) => {
   commit('mutateResolution', resolution)
+}
+
+export const setHaveChanges: ActionIF = ({ commit }, haveChanges: boolean): void => {
+  commit('mutateHaveChanges', haveChanges)
+}
+
+export const setRules = ({ commit }, rules: CreateRulesIF) => {
+  commit('mutateRules', rules)
+}
+
+export const setRulesStepValidity: ActionIF = ({ commit }, validationDetail: ValidationDetailIF): void => {
+  commit('mutateRulesStepValidity', validationDetail)
 }

@@ -15,6 +15,9 @@
         <YourCompany class="mt-10" />
 
         <CurrentDirectors class="mt-10" />
+
+        <UploadRules class="mt-10" />
+
           <!-- more component comes here -->
         <SpecialResolutionForm class="mt-10" v-if="showSpecialResolutionForm" />
       </div>
@@ -98,7 +101,7 @@ import { Action, Getter } from 'vuex-class'
 import { getFeatureFlag } from '@/utils/'
 import { SpecialResolutionSummary, SpecialResolutionForm } from '@/components/SpecialResolution'
 import { CertifySection, CurrentDirectors, DocumentsDelivery,
-  StaffPayment, TransactionalFolioNumber, YourCompany }
+  StaffPayment, TransactionalFolioNumber, UploadRules, YourCompany }
   from '@/components/common/'
 import { CourtOrderPoa as CourtOrderPoaShared } from '@bcrs-shared-components/court-order-poa/'
 import { AuthServices, LegalServices } from '@/services/'
@@ -121,7 +124,8 @@ import { CooperativeResource } from '@/resources/SpecialResolution/'
     StaffPayment,
     TransactionalFolioNumber,
     YourCompany,
-    SpecialResolutionForm
+    SpecialResolutionForm,
+    UploadRules
   }
 })
 export default class SpecialResolution extends Mixins(

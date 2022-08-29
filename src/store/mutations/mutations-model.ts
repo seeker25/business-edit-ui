@@ -1,6 +1,6 @@
 import { AccountInformationIF, ActionKvIF, AddressesIF, BusinessInformationIF, EntitySnapshotIF, CertifyIF,
   FilingDataIF, CorrectionInformationIF, NameRequestIF, NameTranslationIF, OrgPersonIF, ShareClassIF, StateIF,
-  FeesIF, ResourceIF, CreateResolutionIF } from '@/interfaces/'
+  FeesIF, ResourceIF, CreateResolutionIF, ValidationDetailIF, CreateRulesIF } from '@/interfaces/'
 import { CompletingPartyIF, ContactPointIF, NaicsIF, StaffPaymentIF } from '@bcrs-shared-components/interfaces/'
 import { CorpTypeCd } from '@bcrs-shared-components/corp-type-module/'
 import { FilingTypes } from '@/enums/'
@@ -288,4 +288,17 @@ export const mutateNaics = (state: StateIF, naics: NaicsIF) => {
 
 export const mutateResolution = (state: StateIF, resolution: CreateResolutionIF) => {
   state.stateModel.createResolution = resolution
+}
+
+export const mutateHaveChanges = (state: StateIF, haveChanges: boolean) => {
+  state.stateModel.haveChanges = haveChanges
+}
+
+export const mutateRules = (state: StateIF, rules: CreateRulesIF) => {
+  state.stateModel.createRulesStep = rules
+  if (!state.stateModel.ignoreChanges) mutateHaveChanges(state, true)
+}
+
+export const mutateRulesStepValidity = (state: StateIF, validationDetail: ValidationDetailIF) => {
+  state.stateModel.createRulesStep.validationDetail = validationDetail
 }

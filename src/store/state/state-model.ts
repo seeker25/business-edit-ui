@@ -135,5 +135,16 @@ export const stateModel: StateModelIF = {
     resolutionText: '',
     signingPerson: { ...EmptySigningPerson },
     resolutionConfirmed: false
-  }
+  },
+  createRulesStep: {
+    validationDetail: {
+      valid: false,
+      validationItemDetails: []
+    },
+    rulesConfirmed: false,
+    rulesDoc: null,
+    docKey: null
+  },
+  ignoreChanges: false,
+  haveChanges: false
 }
