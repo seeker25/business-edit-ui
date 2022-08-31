@@ -137,6 +137,57 @@ export default class UploadRules extends Mixins(DocumentMixin) {
     this.updateRulesStepValidity()
   }
 
+  // private async fileSelected (file) {
+  //   // reset state of file uploader to ensure not in manual error mode
+  //   this.fileUploadCustomErrorMsg = ''
+  //   if (file) {
+  //     if (this.hasValidUploadFile) {
+  //       this.setUploadRulesDoc(file)
+  //       await this.uploadPendingDocsToStorage()
+  //     } else {
+  //       this.uploadRulesDocKey = null
+  //     }
+  //   } else {
+  //     this.uploadRulesDoc = null
+  //     this.uploadRulesDocKey = null
+  //     this.setRules({
+  //       ...this.getCreateRulesStep,
+  //       rulesDoc: null,
+  //       docKey: null
+  //     })
+  //   }
+  // }
+
+  // public async uploadPendingDocsToStorage () {
+  //   const isPendingUpload = !this.uploadRulesDocKey
+  //   if (isPendingUpload && this.hasValidUploadFile) {
+  //     // NB: will throw if API error
+  //     const doc: DocumentUpload = await this.getPresignedUrl(this.uploadRulesDoc.name)
+
+  //     // NB: will return error response if API error
+  //     const res = await this.uploadToUrl(doc.preSignedUrl, this.uploadRulesDoc, doc.key, this.getUserKeycloakGuid)
+
+  //     if (res && res.status === 200) {
+  //       const rulesDoc = {
+  //         name: this.uploadRulesDoc.name,
+  //         lastModified: this.uploadRulesDoc.lastModified,
+  //         size: this.uploadRulesDoc.size
+  //       }
+  //       this.setRules({
+  //         ...this.getCreateRulesStep,
+  //         rulesDoc: rulesDoc,
+  //         docKey: doc.key
+  //       })
+  //     } else {
+  //       // put file uploader into manual error mode by passing custom error message
+  //       this.fileUploadCustomErrorMsg = this.UPLOAD_FAILED_MESSAGE
+  //       this.hasValidUploadFile = false
+  //       this.updateRulesStepValidity()
+  //       this.uploadRulesDocKey = null
+  //     }
+  //   }
+  // }
+
   private updateRulesStepValidity () {
     const validationDetail:ValidationDetailIF =
       {
@@ -172,6 +223,13 @@ export default class UploadRules extends Mixins(DocumentMixin) {
     await this.$nextTick()
     this.updateRulesStepValidity()
   }
+
+  // @Watch('getShowErrors')
+  // private onShowErrorsChanged (): void {
+  //   if (this.getShowErrors && this.$refs.confirmRulesChk) {
+  //     this.$refs.confirmRulesChk.validate()
+  //   }
+  // }
 }
 
 </script>
