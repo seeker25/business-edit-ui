@@ -25,31 +25,29 @@
               v-model="rulesConfirmed"
               hide-details
               :rules="confirmCompletionRules"
-              label="I confirm the following items are included as required in the Rules of the Association:"
+              label="I confirm the following items are included as required in the Cooperative Associations Act:"
               @change="onRulesConfirmedChange($event)"
             />
-            <ul style="list-style: none">
+            <ul>
               <li class="mt-4">
                 <v-row no-gutters>
                   <v-icon>mdi-circle-small</v-icon>
-                  <v-col cols="11">
-                    <span class="mb-0 ml-2">
+                    <p class="mb-0 ml-2">
                       The Cooperative name is identified <strong>exactly</strong> as follows throughout
                       the Rules of the Association:
-                    </span>
-                    <div class="mt-2 mb-0 font-weight-bold">{{getNameRequestLegalName}}</div>
-                  </v-col>
+                    </p>
+                    <div class="mb-0 font-weight-bold">{{getNameRequestLegalName}}</div>
                 </v-row>
               </li>
-              <li class="mt-4">
+              <li class="mt-1">
                 <v-row no-gutters>
                   <v-icon>mdi-circle-small</v-icon>
                   <v-col cols="11">
-                    <span class="mb-0 ml-2">
+                    <p class="mb-0 mt-4 ml-2">
                       Each Subscriber and Witness has signed and dated the Rules of the
                       Association and their name is printed under their signature.
-                    </span>
-                  </v-col>
+                    </p>
+                   </v-col>
                 </v-row>
               </li>
             </ul>
@@ -90,6 +88,7 @@
         <v-card flat id="upload-rules-card" class="py-8 px-6">
           <v-row no-gutters>
             <v-col cols="12" sm="9" class="pt-4 pt-sm-0">
+              <FileUploadPreview/>
             </v-col>
           </v-row>
         </v-card>
@@ -99,15 +98,24 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Mixins } from 'vue-property-decorator'
 import { Action, Getter } from 'vuex-class'
 import { ActionBindingIF, CreateRulesIF, ValidationDetailIF } from '@/interfaces'
+import { DocumentMixin } from '@/mixins'
+import FileUploadPreview from '@/components/common/FileUploadPreview.vue'
 
-@Component({})
-export default class UploadRules extends Vue {
+@Component({
+  components: {
+    FileUploadPreview
+  }
+})
+export default class UploadRules extends Mixins(DocumentMixin) {
   private hasValidUploadFile = false
   private hasRulesConfirmed = false
   private rulesConfirmed = false
+  private fileUploadCustomErrorMsg: string = ''
+  private uploadRulesDoc: File = null
+  private uploadRulesDocKey: string = null
 
   @Getter getNameRequestLegalName!: string
   @Getter getCreateRulesStep!: CreateRulesIF
@@ -118,6 +126,16 @@ export default class UploadRules extends Vue {
   private confirmCompletionRules = [
     (v) => { return !!v }
   ]
+
+  private setUploadRulesDoc (doc: File) {
+    this.uploadRulesDoc = doc
+    this.uploadRulesDocKey = null
+  }
+
+  private isFileUploadValidFn (val) {
+    this.hasValidUploadFile = val
+    this.updateRulesStepValidity()
+  }
 
   private updateRulesStepValidity () {
     const validationDetail:ValidationDetailIF =
@@ -139,10 +157,30 @@ export default class UploadRules extends Vue {
       rulesConfirmed: rulesConfirmed
     })
   }
+
+  /** Called when component is created. */
+  created (): void {
+    this.uploadRulesDoc = this.getCreateRulesStep.rulesDoc as File
+    this.uploadRulesDocKey = this.getCreateRulesStep.docKey
+    this.rulesConfirmed = this.getCreateRulesStep.rulesConfirmed
+    this.hasValidUploadFile = !!this.uploadRulesDocKey
+    this.hasRulesConfirmed = this.rulesConfirmed
+  }
+
+  async mounted (): Promise<void> {
+    // wait for components to load/stabilize then update validation state in store
+    await this.$nextTick()
+    this.updateRulesStepValidity()
+  }
 }
 
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/styles/theme.scss';
+
+ul {
+  list-style: none;
+  color: $gray7;
+}
 </style>
