@@ -54,15 +54,9 @@
           :validate="getAppValidate"
         />
 
-        <CompletingParty
-          class="mt-10"
-          :sectionNumber="showTransactionalFolioNumber ? '3.' : '2.'"
-          :validate="getAppValidate"
-        />
-
         <CertifySection
           class="mt-10"
-          :sectionNumber="showTransactionalFolioNumber ? '4.' : '3.'"
+          :sectionNumber="showTransactionalFolioNumber ? '3.' : '2.'"
           :validate="getAppValidate"
           :disableEdit="!isRoleStaff"
         />
@@ -70,7 +64,7 @@
         <template v-if="isRoleStaff">
           <StaffPayment
             class="mt-10"
-            sectionNumber="4."
+            sectionNumber="3."
             @haveChanges="onStaffPaymentChanges($event)"
           />
         </template>
@@ -111,7 +105,7 @@ import { Action, Getter } from 'vuex-class'
 import { getFeatureFlag } from '@/utils/'
 import { SpecialResolutionSummary, CreateSpecialResolution } from '@/components/SpecialResolution'
 import { CertifySection, CurrentDirectors, DocumentsDelivery, StaffPayment, TransactionalFolioNumber,
-  YourCompany, CompletingParty } from '@/components/common/'
+  YourCompany } from '@/components/common/'
 import { AuthServices, LegalServices } from '@/services/'
 import { CommonMixin, FeeMixin, FilingTemplateMixin } from '@/mixins/'
 import { ActionBindingIF, EntitySnapshotIF, FlagsReviewCertifyIF, ResourceIF } from '@/interfaces/'
@@ -128,8 +122,7 @@ import { CooperativeResource } from '@/resources/SpecialResolution/'
     StaffPayment,
     TransactionalFolioNumber,
     YourCompany,
-    CreateSpecialResolution,
-    CompletingParty
+    CreateSpecialResolution
   }
 })
 export default class SpecialResolution extends Mixins(

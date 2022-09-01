@@ -316,7 +316,12 @@ export default class FilingTemplateMixin extends Mixins(DateMixin, EnumMixin) {
 
     // Apply NR / business name / business type change to filing
     if (this.getNameRequestNumber || this.hasBusinessNameChanged || this.hasBusinessTypeChanged) {
-      filing.changeOfName = { nameRequest: this.getNameRequest }
+      // The api reuqires legalName here, otherwise it wont pass the validator
+      filing.changeOfName = {
+        nameRequest: this.getNameRequest,
+        // TODO: this needs to be removed when API is fixed.
+        legalName: this.getNameRequest.legalName
+      }
     }
 
     if (this.getDocumentOptionalEmail) {

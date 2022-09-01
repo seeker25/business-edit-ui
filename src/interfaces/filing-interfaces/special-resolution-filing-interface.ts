@@ -4,6 +4,8 @@ import { SpecialResolutionIF } from '@bcrs-shared-components/interfaces'
 /** Override what's in BCRS Shared Components, needs to be refactored in the future. */
 export interface ChangeOfNameIF {
   nameRequest: NameRequestIF
+  // TODO: Below neeeds to be removed when API is fixed.
+  legalName: string
 }
 
 /** Interface for data object UI sends to API. */

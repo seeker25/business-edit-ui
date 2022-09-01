@@ -29,7 +29,7 @@ describe('Special Resolution Form component', () => {
   const emptyPerson = {
     givenName: '',
     familyName: '',
-    additionalName: null
+    additionalName: ''
   }
 
   beforeAll(() => {

@@ -226,7 +226,7 @@ export default class CreateSpecialResolution extends Mixins(DateMixin) {
   protected signatory: PersonIF = {
     givenName: '',
     familyName: '',
-    additionalName: null
+    additionalName: ''
   }
 
   /** Validation rule for individual name fields */
@@ -263,7 +263,7 @@ export default class CreateSpecialResolution extends Mixins(DateMixin) {
   get resolutionDateMin (): Date {
     /** TODO: Needs to be after the most recent filing date, I don't think the business founding date is correct
      * Will be fixed in 13231 */
-    return this.apiToDate(this.getBusinessFoundingDate)
+    return this.yyyyMmDdToDate(this.getCurrentDate) // TODO: fix when API is available.
   }
 
   /** The maximum date that can be entered (today). */
@@ -411,7 +411,7 @@ export default class CreateSpecialResolution extends Mixins(DateMixin) {
       {
         givenName: '',
         familyName: '',
-        additionalName: null
+        additionalName: ''
       }
     this.resolution = this.getSpecialResolution.resolution || ''
     this.resolutionDateText = this.getSpecialResolution.resolutionDate || ''
