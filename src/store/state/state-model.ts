@@ -141,5 +141,15 @@ export const stateModel: StateModelIF = {
       additionalName: null
     },
     resolutionConfirmed: false
-  }
+  },
+  rules: {
+    confirmed: false,
+    key: null
+  },
+  memorandum: {
+    confirmed: false,
+    key: null
+  },
+  ignoreChanges: false,
+  haveChanges: false
 }

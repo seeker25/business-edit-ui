@@ -1,8 +1,8 @@
 import { AccountInformationIF, ActionKvIF, AddressesIF, BusinessInformationIF, EntitySnapshotIF, CertifyIF,
   FilingDataIF, CorrectionInformationIF, NameRequestIF, NameTranslationIF, OrgPersonIF, ShareClassIF, StateIF,
-  FeesIF, ResourceIF } from '@/interfaces/'
-import { CompletingPartyIF, ContactPointIF, NaicsIF, SpecialResolutionIF,
-  StaffPaymentIF } from '@bcrs-shared-components/interfaces/'
+  FeesIF, ResourceIF, RulesMemorandumIF } from '@/interfaces/'
+import { CompletingPartyIF, ContactPointIF, NaicsIF,
+  SpecialResolutionIF, StaffPaymentIF } from '@bcrs-shared-components/interfaces/'
 import { CorpTypeCd } from '@bcrs-shared-components/corp-type-module/'
 import { FilingTypes } from '@/enums/'
 
@@ -293,4 +293,16 @@ export const mutateSpecialResolution = (state: StateIF, specialResolution: Speci
 
 export const mutateSpecialResolutionConfirmStateValidity = (state: StateIF, validity: boolean) => {
   state.stateModel.validationFlags.flagsReviewCertify.isValidSpecialResolutionConfirm = validity
+}
+
+export const mutateHaveChanges = (state: StateIF, haveChanges: boolean) => {
+  state.stateModel.haveChanges = haveChanges
+}
+
+export const mutateRules = (state: StateIF, rules: RulesMemorandumIF) => {
+  state.stateModel.rules = rules
+}
+
+export const mutateMemorandum = (state: StateIF, memorandum: RulesMemorandumIF) => {
+  state.stateModel.memorandum = memorandum
 }

@@ -1,5 +1,6 @@
 import { CorrectionTypes, NameRequestEntityTypes, NameRequestTypes } from '@/enums/'
 import { HelpSectionIF, FilingDataIF, SpecialResolutionSampleFormIF } from '@/interfaces/'
+import { RulesMemorandumResourceIF } from './rules-memorandum-resource-interface'
 
 /** Interface to define the resource model example */
 export interface ResourceIF {
@@ -26,4 +27,8 @@ export interface ResourceIF {
     addressChangeInfo?: string
   }
   certifyClause: string
+
+  // CP only
+  rules?: RulesMemorandumResourceIF
+  memorandum?: RulesMemorandumResourceIF
 }

@@ -5,9 +5,10 @@ import { AddressesIF, OrgPersonIF, ShareClassIF, NameRequestIF, BusinessInformat
   CertifyIF,
   NameTranslationIF, FilingDataIF, StateIF, EffectiveDateTimeIF, FlagsReviewCertifyIF,
   FlagsCompanyInfoIF, ResolutionsIF, FeesIF, ResourceIF, EntitySnapshotIF, ValidationFlagsIF,
-  CorrectionInformationIF }
+  CorrectionInformationIF, RulesMemorandumResourceIF, RulesMemorandumIF }
   from '@/interfaces/'
-import { CompletingPartyIF, ContactPointIF, NaicsIF, StaffPaymentIF, SpecialResolutionIF }
+import { CompletingPartyIF, ContactPointIF, NaicsIF,
+  StaffPaymentIF, SpecialResolutionIF }
   from '@bcrs-shared-components/interfaces/'
 import { isSame } from '@/utils/'
 
@@ -939,4 +940,24 @@ export const getSpecialResolutionFormValid = (state: StateIF): boolean => {
 /** The company info page validity flags. */
 export const getSpecialResolutionConfirmValid = (state: StateIF): boolean => {
   return getFlagsReviewCertify(state).isValidSpecialResolutionConfirm
+}
+
+/** The rules resource object. */
+export const getRulesResource = (state: StateIF): RulesMemorandumResourceIF => {
+  return state.resourceModel.rules
+}
+
+/** The memorandum resource object. */
+export const getMemorandumResource = (state: StateIF): RulesMemorandumResourceIF => {
+  return state.resourceModel.memorandum
+}
+
+/** The rules object. */
+export const getRules = (state: StateIF): RulesMemorandumIF => {
+  return state.stateModel.rules
+}
+
+/** The memorandum object. */
+export const getMemorandum = (state: StateIF): RulesMemorandumIF => {
+  return state.stateModel.memorandum
 }

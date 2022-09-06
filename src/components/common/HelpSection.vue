@@ -8,17 +8,22 @@
 
     <v-expand-transition v-if="helpToggle">
       <section class="help-section info-text">
-        <header class="help-header mt-4">
-          <h2>Contact BC Registries</h2>
-        </header>
+        <div v-if="$slots.overrideContent">
+          <slot name="overrideContent" />
+        </div>
+        <div v-else>
+          <header class="help-header mt-4">
+            <h2>Contact BC Registries</h2>
+          </header>
 
-        <p v-for="(item, index) in items" :key="index" class="mt-4 py-1" v-html="item" />
+          <p v-for="(item, index) in items" :key="index" class="mt-4 py-1" v-html="item" />
 
-        <!-- BC Registry Contacts -->
-        <BcRegContacts class="mb-6" :direction="'col'" />
+          <!-- BC Registry Contacts -->
+          <BcRegContacts class="mb-6" :direction="'col'" />
 
-        <label>Hours of Operation:</label>
-        <p>Monday to Friday, 8:30am - 4:30pm Pacific time</p>
+          <label>Hours of Operation:</label>
+          <p>Monday to Friday, 8:30am - 4:30pm Pacific time</p>
+        </div>
         <div class="help-btn bottom" @click="helpToggle = !helpToggle">Hide Help</div>
       </section>
     </v-expand-transition>
@@ -39,10 +44,13 @@ export default class HelpSection extends Vue {
   @Prop({ default: () => {} })
   readonly helpSection: HelpSectionIF
 
+  @Prop({ default: null })
+  readonly overrideHeader!: string
+
   helpToggle = false
 
   get header (): string {
-    return this.helpSection?.header || 'this section'
+    return this.overrideHeader || this.helpSection?.header || 'this section'
   }
 
   get items (): string[] {

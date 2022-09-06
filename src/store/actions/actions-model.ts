@@ -1,8 +1,8 @@
 import { ActionIF, ActionKvIF, AddressesIF, BusinessInformationIF, CertifyIF, EntitySnapshotIF,
   NameRequestIF, NameTranslationIF, OrgPersonIF, FeesIF, ResourceIF, FilingDataIF,
-  CorrectionInformationIF } from '@/interfaces/'
-import { CompletingPartyIF, ContactPointIF,
-  NaicsIF, ShareClassIF, SpecialResolutionIF } from '@bcrs-shared-components/interfaces/'
+  CorrectionInformationIF, RulesMemorandumIF } from '@/interfaces/'
+import { CompletingPartyIF, ContactPointIF, NaicsIF, ShareClassIF,
+  SpecialResolutionIF } from '@bcrs-shared-components/interfaces'
 import { FilingTypes } from '@/enums/'
 import { CorpTypeCd } from '@bcrs-shared-components/corp-type-module/'
 
@@ -277,4 +277,16 @@ export const setSpecialResolution = ({ commit }, specialResolution: SpecialResol
 
 export const setSpecialResolutionConfirmStateValidity: ActionIF = ({ commit }, validity: boolean): void => {
   commit('mutateSpecialResolutionConfirmStateValidity', validity)
+}
+
+export const setHaveChanges: ActionIF = ({ commit }, haveChanges: boolean): void => {
+  commit('mutateHaveChanges', haveChanges)
+}
+
+export const setRules = ({ commit }, rules: RulesMemorandumIF) => {
+  commit('mutateRules', rules)
+}
+
+export const setMemorandum = ({ commit }, memorandum: RulesMemorandumIF) => {
+  commit('mutateMemorandum', memorandum)
 }

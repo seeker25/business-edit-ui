@@ -11,6 +11,9 @@ export { default as ErrorContact } from './ErrorContact.vue'
 export { default as StaffPayment } from './StaffPayment.vue'
 export { default as CourtOrderPoa } from './CourtOrderPoa.vue'
 export { default as TransactionalFolioNumber } from './TransactionalFolioNumber.vue'
+export { default as Rules } from './RulesAndMemorandum/Rules.vue'
+export { default as Memorandum } from './RulesAndMemorandum/Memorandum.vue'
+export { default as FileUploadPreview } from './FileUploadPreview.vue'
 
 // these must come last as they depend on the above
 export * from './PeopleAndRoles'
